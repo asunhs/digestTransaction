@@ -1,0 +1,68 @@
+
+
+
+Angularjs
+
+    angular 그래프
+    
+    |            |
+    |   ___      |
+    |  /   \__   |
+    |  |      \__|
+    |  |
+    |  /
+    | /
+    |/____________________
+    
+    
+    
+    
+
+    angular context
+    : angular는 브라우져를 점령하지 않고 container 영향력 안에서만 적용됩니다.
+      따라서, 브라우져가 발생하는 일들을 angular 에게 알려줘야 합니다.
+      
+      이를 위한 도구가 $watch, $apply, $digest 입니다.
+      
+      오늘은 두 가지에 대해서만 하겠습니다.
+      
+    그 전에 angular 가 나누고 있는 두 부분에 대해서 언급하고 싶습니다.
+    
+    바로, event를 'data 변경'과 'action' 으로 구분한다는 점입니다.
+    이 점을 구분해서 생각하면 많은 부분 편리합니다.
+    실제로, 우리는 데이터가 변경되었음을 감지하기 위해 데이터가 변경될 수 있는 길목을 모두 감시하는 코드들을 짜곤 합니다.
+    헌데, 이 부분은 action으로 해석할 user activity 와 섞여 뭔가 구분하기 어려운 event handling 을 하기도 합니다.
+    
+    angular 는 적어도 context 안에서 발생하는 이벤트에 대해서는 항상 data 변경을 감시해 줍니다.
+    따라서 어떤 이벤트는 action 을 위해서만 디자인 하면 됩니다.
+    
+    이 점은 angular 를 써서 얻는 이점 중에 가장 먼저 느낄 수 있으면서도, 사실 가장 늦게 활용하는 부분이 아닐까 싶습니다.
+    
+    - $watch
+      : data에 변화가 생겼다!
+      
+    - $apply
+      : action이 발생했다!
+
+    (sub tip)
+    ui 극복하기
+    - ng-class
+
+
+Node (or nio / mongo)
+
+    NIO 는 덜 익숙합니다.
+    그리고 Async-flow 중 한번이라도 Sync 가 발생하면 장점을 많이 상실합니다.
+    
+    꼭 NIO 가 아니더라도 higher-order function 을 십분 활용하는 코드에서는 함수 간 dependency (혹은 콜백 지옥) 가 발생할 수 있습니다.
+    이런 부분들을 줄여주고 refactoring 도 도와주는 개념을 소개할까 합니다.
+    
+    - async
+
+
+Underscore.js
+    - functional 이 도움을 주는 부분
+      : 이론을 코드로 옮기기 쉽다
+      
+    - 부족한 데이터 핸들링에 대한 커버
+      (적절히 서버와 클라이언트로 부하 분산 : Restful-like 는 덤으로)

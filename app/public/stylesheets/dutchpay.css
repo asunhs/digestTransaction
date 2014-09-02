@@ -1,0 +1,109 @@
+body {
+    font-family:'Malgun Gothic';
+    color: #333333;
+}
+
+span.button {
+    float: right;
+    background-color: #88aa88;
+    border-radius: 5px;
+    padding: 3px 5px 3px 5px;
+    color: #dddddd;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+::-webkit-input-placeholder {
+    color: #668866;
+}
+
+input {
+    background-color: #b0ccb0;
+    border: 0px;
+    font-size: 1em;
+}
+
+h3 input {
+    font-weight: bold;
+}
+
+input[type=number] {
+    text-align: right;
+}
+
+ul.receipts {
+    list-style:none;
+    margin: 0;
+    padding: 40px;
+    width: 600px;
+    background-color: #d8be5c;
+}
+
+ul.receipts > li {
+    padding: 7px;
+    margin-bottom: 9px;
+    width: 580px;
+    border: 3px solid #968c8c;
+    border-radius: 10px;
+    background-color: #b0ccb0;
+    box-shadow: 2px 2px 3px #968c8c;
+}
+
+ul.receipts > li:nth-child(1) {
+    text-align: center;
+    background-color: #968c8c;
+    color: #dddddd;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+ul.receipts > li:nth-child(2) {
+    background-color: #88aa88;
+    color: #dddddd;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+ul.receipts > li:last-child {
+    margin-bottom: 0px;
+}
+
+ul.receipts > li.dg-selected {
+    padding: 7px;
+    border: 3px solid #bb6827;
+    background-color: #dd8047;
+}
+
+ul.receipts > li.dg-removed {
+    background-color: #ddddff;
+}
+
+ul.receipts > li.dg-digested {
+    background-color: #94b6d2;
+}
+
+ul.receipt {
+    list-style:none;
+    padding: 10px;
+    width: 560px;
+    margin-top: 5px;
+    background-color: #88aa88;
+    border-radius: 8px;
+}
+
+li.dg-digested ul.receipt {
+    background-color: #7294b0;
+}
+
+li.dg-selected ul.receipt {
+    background-color: #bb5825;
+}
+
+ul.receipt > li {
+    margin: 0;
+    padding: 0;
+}
+
+ul.receipt > li input {
+    background-color: #88aa88;
+}
