@@ -9,10 +9,10 @@
             return new Distributer(precision);
         }
         
-        precision = precision || 1;
+        this.precision = precision || 1;
         
         this.distribute = function (total, n) {
-            return this.sequenceBasedDistribute(total, n, precision);
+            return this.sequenceBasedDistribute(total, n, this.precision);
         };
     }
     
@@ -50,7 +50,9 @@
             restrict : 'A',
             link : function (scope, element, attrs) {
                 
-                var dist = new Distributer(100);
+                var dist = new Distributer();
+                
+                dist.precision = 50;
                 
                 scope.$watch('receipt.total', function (newValue, oldValue) {
                     
