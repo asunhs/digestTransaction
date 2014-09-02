@@ -3,7 +3,6 @@ var path = require('path');
 var fs = require('fs');
 var favicon = require('static-favicon');
 var logger = require('morgan');
-var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var requires = require('./requires');
@@ -19,7 +18,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
 
-mongoose.connect('mongodb://localhost/digest');
 
 // models
 requires(path.join(__dirname, '/models'));
