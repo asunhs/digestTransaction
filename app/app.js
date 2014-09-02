@@ -6,6 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var requires = require('./requires');
 
 var app = express();
 
@@ -21,22 +22,14 @@ app.use(express.static(path.join(__dirname, 'views')));
 mongoose.connect('mongodb://localhost/digest');
 
 // models
-var modelsPath = path.join(__dirname, '/models');
-fs.readdirSync(modelsPath).forEach(function (file) {
-    if (/(.*)\.(js$)/.test(file)) {
-        require(modelsPath + '/' + file);
-    }
-});
+requires(path.join(__dirname, '/models'));
 
 
 // routes
-var routesPath = path.join(__dirname, '/routes');
-fs.readdirSync(routesPath).forEach(function (file) {
-    var matched = file.match(/(.*)\.(js$)/);
-    if (matched) {
-        app.use('/' + matched[1], require(routesPath + '/' + file));
-    }
+requires(path.join(__dirname, '/routes'), function (api, route) {
+    app.use('/' + api, route);
 });
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

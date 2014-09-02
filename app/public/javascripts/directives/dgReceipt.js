@@ -48,7 +48,7 @@
                 
                 var dist = new Distributer();
                 
-                dist.precision = 100;
+                dist.precision = 50;
                 
                 scope.$watch('receipt.total', function (newValue, oldValue) {
                     
