@@ -1,6 +1,19 @@
 body {
     font-family:'Malgun Gothic';
+    background-color: #d8be5c;
     color: #333333;
+}
+
+div {
+    margin: auto;
+}
+
+ul {
+    padding: 0;
+}
+
+body > div {
+    width: 600px;
 }
 
 span.button {
@@ -34,9 +47,6 @@ input[type=number] {
 ul.receipts {
     list-style:none;
     margin: 0;
-    padding: 40px;
-    width: 600px;
-    background-color: #d8be5c;
 }
 
 ul.receipts > li {
