@@ -10,10 +10,6 @@
         }
         
         this.precision = precision || 1;
-        
-        this.distribute = function (total, n) {
-            return this.sequenceBasedDistribute(total, n, this.precision);
-        };
     }
     
     Distributer.prototype.evenly = function (total, n) {
@@ -21,21 +17,21 @@
         var rest = total % n,
             amount = (total - rest) / n;
 
-        return _.times(n, function (index) {
+        return _.times(n, function () {
             return amount + ((rest-- > 0 ) ? 1 : 0);
         });
     };
     
-    Distributer.prototype.sequenceBasedDistribute = function (total, n, precision) {
+    Distributer.prototype.distribute = function (total, n) {
         
         if (n == 0) {
             return;
         }
 
-        var rest = total % precision,
-            dist = _.map(this.evenly((total - rest) / precision, n), function (amount) {
-                return amount * precision;
-            });
+        var rest = total % this.precision,
+            dist = _.map(this.evenly((total - rest) / this.precision, n), function (amount) {
+                return amount * this.precision;
+            }, this);
 
         dist[0] += rest;
         
@@ -52,7 +48,7 @@
                 
                 var dist = new Distributer();
                 
-                dist.precision = 50;
+                dist.precision = 100;
                 
                 scope.$watch('receipt.total', function (newValue, oldValue) {
                     
