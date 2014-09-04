@@ -6,13 +6,17 @@ var db = require('../dbs');
 var digest = require('../services/digest');
 
 
+router.all('*', function (req, res, next) {
+    console.log('request for receipts,', req.session.user.nick);
+    next();
+});
+
 /* GET users listing. */
 router.get('/', function(req, res) {
     
     db.receipts.find(null, function (err, receipts) {
-        
         if (!!err) {
-            return res.send(err);
+            return res.status(400).send(err.message);
         }
 
         return res.send(receipts);
@@ -35,6 +39,10 @@ router.post('/save', function (req, res) {
         }).value();
     
     db.receipts.save(receipts, function (err, receipts) {
+        if (!!err) {
+            return res.status(400).send(err.message);
+        }
+        
         res.send(receipts);
     });
     
@@ -87,15 +95,19 @@ router.post('/digest', function (req, res) {
                 receipt.digestId = digest._id;
                 receipt.save(cb);
             }, function (err) {
-                cb(_.union(receipts, digests));
+                if (!!err) {
+                    cb(err);
+                }
+                
+                cb(null, _.union(receipts, digests));
             });
         }
     ], function (err, results) {
         if (!!err) {
-            res.send(err);
-        } else {
-            res.send(results);
+            return res.status(400).send(err.message);
         }
+        
+        return res.send(results);
     });
     
 });
@@ -144,6 +156,10 @@ router.post('/remove', function (req, res) {
             
         }
     ], function (err, receipts) {
+        if (!!err) {
+            return res.status(400).send(err.message);
+        }
+        
         res.send(receipts);
     });
     

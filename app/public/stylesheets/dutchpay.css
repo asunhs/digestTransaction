@@ -8,12 +8,12 @@ div {
     margin: auto;
 }
 
-ul {
-    padding: 0;
+div.container {
+    width: 600px;
 }
 
-body > div {
-    width: 600px;
+ul {
+    padding: 0;
 }
 
 span.button {

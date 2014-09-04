@@ -2,9 +2,11 @@
     'use strict';
     
     angular.module('DutchPayApp')
-    .controller('MainCtrl', function ($scope, ModeSvc, ReceiptsSvc, Receipts) {
+    .controller('ReceiptCtrl', function ($scope, $location, User, ModeSvc, ReceiptsSvc, Receipts) {
         
         ReceiptsSvc.pullReceipts();
+        
+        $scope.user = User;
         
         $scope.welcome = "Welcome!";
         
@@ -70,6 +72,10 @@
             }
             
             receipts.push(ReceiptsSvc.newReceipt());
+        };
+        
+        $scope.logout = function () {
+            $location.path('/');
         };
     });
 }());

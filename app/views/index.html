@@ -6,68 +6,21 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-route.js"></script>
     <script src="./javascripts/dutchpayapp.js"></script>
-    <script src="./javascripts/ctrl/mainCtrl.js"></script>
+    <script src="./javascripts/ctrl/welcomeCtrl.js"></script>
+    <script src="./javascripts/ctrl/receiptCtrl.js"></script>
     <script src="./javascripts/svc/receiptsSvc.js"></script>
+    <script src="./javascripts/svc/userSvc.js"></script>
     <script src="./javascripts/svc/modeSvc.js"></script>
     <script src="./javascripts/model/pools.js"></script>
     <script src="./javascripts/model/receipts.js"></script>
+    <script src="./javascripts/model/user.js"></script>
     <script src="./javascripts/directives/dgSelectable.js"></script>
     <script src="./javascripts/directives/dgReceipt.js"></script>
     <script src="./javascripts/filters/receiptFilter.js"></script>
 </head>
 <body ng-app="DutchPayApp">
-    <div ng-controller="MainCtrl">
-        <h1>{{welcome}}</h1>
-        <div class="container">
-            <ul class="receipts">
-                <li ng-click="toggleDigestMode()">{{getMode()}} Mode</li>
-                <li ng-if="confirmMode(modes.BOOK)" ng-click="addReceipt(receipts)">+ New Receipt</li>
-                <li ng-if="confirmMode(modes.DIGEST)" ng-click="digest()">Digest</li>
-                <li ng-if="!receipt.removedTimestamp"
-                    ng-class="{ 'dg-selected' : receipt.isSelected, 'dg-digested' : receipt.digestId }"
-                    ng-repeat="receipt in receipts | orderBy:'createdTimestamp':true"
-                    dg-selectable >
-                    
-                    <div ng-if="!!receipt.owner && !!receipt.createdTimestamp">
-                        <span class="button" ng-if="confirmMode(modes.BOOK) && !receipt.digestId" style="float:right;" ng-click="removeReceipts([receipt])">Remove</span>
-                        <h3>{{receipt.title}}</h3>
-                        <span style="float:right;" >Total : {{getTotal(receipt)}}</span>
-                        <div>To. {{receipt.owner}}</div>
-                        <ul class="receipt">
-                            <li ng-repeat="transaction in receipt.transactions">
-                                {{transaction.from}} : {{transaction.amount}}
-                            </li>
-                        </ul>
-                    </div>
-                        
-                    <div ng-if="!receipt.createdTimestamp" dg-receipt >
-                        <span class="button" style="float:right;" ng-click="saveReceipts([receipt])">Save</span>
-                        <h3><input type="text" ng-model="receipt.title" placeholder="Title" /></h3>
-                        <span style="float:right;" >Total : <input type="number" ng-model="receipt.total" /></span>
-                        To. <input type="text" ng-model="receipt.owner" placeholder="Owner" />
-                        <ul class="receipt">
-                            <li ng-click="addTransaction(receipt)">+ New Row</li>
-                            <li ng-repeat="transaction in receipt.transactions" dg-transaction >
-                                <input type="text" ng-model="transaction.from" placeholder="from" /> : <input type="number" ng-model="transaction.amount" placeholder="amount" />
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div ng-if="!receipt.owner && !!receipt.createdTimestamp">
-                        <span class="button" ng-if="confirmMode(modes.BOOK) && !receipt.digestId" style="float:right;" ng-click="removeReceipts([receipt])">Revoke</span>
-                        <h3>{{receipt.title}}</h3>
-                        <span style="float:right;" >Total : {{getTotal(receipt)}}</span>
-                        <div ng-repeat="receiptId in receipt.receipts">{{receiptId | receipt}}</div>
-                        <ul class="receipt">
-                            <li ng-repeat="transaction in receipt.transactions">
-                                {{transaction.from}} -> {{transaction.to}} : {{transaction.amount}}
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <ng-view></ng-view>
 </body>
 </html>

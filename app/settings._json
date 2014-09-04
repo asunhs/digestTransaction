@@ -4,5 +4,7 @@
         "db" : "digest",
         "user" : "user",
         "password" : "pass"
-    }
+    },
+    "sessionKey" : "__SoMeKeY__",
+    "hashKey" : "__SoMeKeY__"
 }

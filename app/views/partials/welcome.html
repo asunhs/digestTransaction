@@ -1,0 +1,46 @@
+<style>
+    div.form {
+        width: 320px;
+    }
+    
+    div.form input {
+        width: 310px;
+        background-color: #fae07e;
+        border: 0px;
+        font-size: 1.1em;
+        font-weight: bold;
+        padding: 5px;
+        margin : 5px;
+    }
+
+    div.form input::-webkit-input-placeholder {
+        color: #d8be5c;
+    }
+    
+    div.form > span {
+        margin : 5px;
+    }
+    
+    div.form > div.error {
+        border: 1px red solid;
+        color : red;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="form" style="width : 320px;">
+        <h1>Welcome</h1>
+        <div class="error" ng-if="error">Account Infomation is incorrected.</div>
+        <form ng-submit="login()">
+            <input type="text" placeholder="Email ex> email@example.com" ng-model="user.email" />
+            <input ng-if="isSignUp" type="text" placeholder="Nick name" ng-model="user.nick"  />
+            <input type="password" placeholder="Password" ng-model="user.password" />
+            <input ng-if="isSignUp" type="password" placeholder="Confirm password" ng-model="user.confirmed" />
+            <input ng-show="false" type="submit" value="Submit"/>
+        </form>
+        <span ng-if="!isSignUp" class="button" ng-click="login()">Login</span>
+        <span ng-if="isSignUp" class="button" ng-click="cancel()">Cancel</span>
+        <span class="button" ng-click="signUp()">Sign Up</span>
+    </div>
+</div>
